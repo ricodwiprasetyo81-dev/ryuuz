@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Profesional | Tuan Ryuu</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* --Variabel CSS-- 
+          Ini adalah "Pintasan" untuk kode warna, agar mudah diganti jika diperlukan.
+          Ini adalah praktik profesional dalam desain web.
+        */
+        :root {
+            --bg-dark-primary: #0f0c29;  /* Background utama (Hitam Keunguan) */
+            --bg-dark-secondary: #1d1b31; /* Background untuk 'card' (Ungu Gelap) */
+            --color-primary: #8e44ad;    /* Ungu Cerah (Aksen Utama) */
+            --color-secondary: #5fa8d3;  /* Biru Muda (Aksen Kedua) */
+            --text-primary: #f0f0f1;     /* Teks Putih Cerah */
+            --text-secondary: #b4b4b4;   /* Teks Abu-abu (Sub-judul) */
+            --border-color: #3a3a5c;
+        }
+
+        /* --- Reset & Pengaturan Global --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Efek scroll halus saat klik menu navigasi */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* --- Pengaturan Kontainer & Judul --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0; /* Jarak atas-bawah untuk setiap bagian */
+        }
+        
+        /* Memberi warna latar belakang berbeda antar bagian agar tidak monoton */
+        .section-bg-light {
+            background-color: var(--bg-dark-secondary);
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- 1. Navigasi Bar --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(15, 12, 41, 0.9); /* Transparan sedikit */
+            backdrop-filter: blur(10px); /* Efek blur di belakang navbar */
+            padding: 1rem 2rem;
+            position: fixed; /* Tetap di atas saat di-scroll */
+            width: 100%;
+            top: 0;
+            z-index: 1000; /* Selalu di lapisan paling atas */
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--color-primary); /* Aksen ungu pada nama */
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: var(--color-secondary); /* Warna biru saat di-hover */
+        }
+        
+        /* Tombol Hamburger (untuk HP) */
+        .nav-toggle {
+            display: none; /* Sembunyikan di desktop */
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* --- 2. Hero Section --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+            background: linear-gradient(135deg, var(--bg-dark-primary) 0%, #302b63 100%);
+            margin-top: -80px; /* Menutupi ruang navbar (karena navbar 'fixed') */
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--color-secondary);
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Tombol CTA (Call to Action) */
+        .cta-button {
+            display: inline-block;
+            background: var(--color-primary);
+            color: var(--text-primary);
+            padding: 14px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease-in-out;
+            border: 2px solid var(--color-primary);
+        }
+
+        .cta-button:hover {
+            background: var(--color-secondary);
+            border-color: var(--color-secondary);
+            color: var(--bg-dark-primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(95, 168, 211, 0.2);
+        }
+
+        /* --- 3. Tentang Saya --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr; /* 1 bagian foto, 2 bagian teks */
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: url('https://via.placeholder.com/400x400/8e44ad/ffffff?text=Foto+Tuan+Ryuu') center/cover;
+            border-radius: 10px;
+            border: 4px solid var(--border-color);
+        }
+
+        .about-bio h3 {
+            font-size: 1.8rem;
+            color: var(--color-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .about-bio p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-skills h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skills-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skills-list li {
+            background: var(--bg-dark-primary);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+        }
+
+        /* --- 4. Layanan (Bagian Baru) --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-dark-primary);
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-primary);
+            box-shadow: 0 10px 30px rgba(142, 68, 173, 0.1);
+        }
+
+        .service-card .icon {
+            font-size: 3rem;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* --- 5. Galeri / Portofolio (Dengan Filter) --- */
+        .portfolio-filters {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: var(--text-primary);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(142, 68, 173, 0.8), rgba(95, 168, 211, 0.9));
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .detail-button { /* Mengganti "Beli" dengan "Detail" agar lebih resmi */
+            background: #ffffff;
+            color: var(--color-primary);
+            padding: 8px 20px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        
+        .detail-button:hover {
+            background: #f0f0f0;
+        }
+
+        /* --- 6. Kontak --- */
+        #contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        #contact-form input,
+        #contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg-dark-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        #contact-form input:focus,
+        #contact-form textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+        
+        #contact-form button {
+            width: 100%;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        /* --- 7. Footer --- */
+        footer {
+            background: var(--bg-dark-primary);
+            padding: 4rem 0 2rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+        
+        .footer-about h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-about p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            max-width: 300px;
+        }
+
+        .footer-links h4,
+        .footer-social h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links li a:hover {
+            color: var(--color-secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-bottom p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* --- Pengaturan Responsif (Untuk Tampilan HP) --- */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px; /* Di bawah navbar */
+                left: -100%; /* Sembunyi di kiri */
+                width: 100%;
+                height: 100vh;
+                background: var(--bg-dark-secondary);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 3rem;
+                gap: 2.5rem;
+                transition: left 0.4s ease-in-out;
+            }
+            
+            /* Tampilkan menu saat di-klik */
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-toggle {
+                display: block; /* Tampilkan tombol hamburger */
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr; /* Stack foto dan teks */
+                text-align: center;
+            }
+            
+            .about-image {
+                margin: 0 auto;
+                height: 300px;
+                width: 300px;
+            }
+            
+            .skills-list {
+                justify-content: center;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+    </head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#hero" class="nav-logo">Tuan <span>Ryuu</span></a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#hero" class="active">Beranda</a></li>
+                <li><a href="#about">Tentang Saya</a></li>
+                <li><a href="#services">Layanan</a></li>
+                <li><a href="#portfolio">Portofolio</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+            
+            <div class="nav-toggle" id="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <header id="hero">
+        <h1 class="hero-title">Selamat Datang di Portofolio Tuan Ryuu</h1>
+        <p class="hero-subtitle">Digital Creator & Pixel Artist Profesional</p>
+        <a href="#portfolio" class="cta-button">Lihat Karya Terbaru</a>
+    </header>
+
+    <main>
+
+        <section id="about" class="container">
+            <h2 class="section-title">Tentang Saya</h2>
+            <p class="section-subtitle">Mengenal lebih dekat kreator di balik karya-karya ini.</p>
+            
+            <div class="about-grid">
+                <div class="about-image"></div>
+                
+                <div class="about-bio">
+                    <h3>Biografi Singkat</h3>
+                    <p>
+                        Halo! Saya Tuan Ryuu, seorang kreator digital dengan fokus utama pada seni piksel dan desain kreatif. Saya mendedikasikan diri untuk mengubah ide-ide imajinatif menjadi karya visual yang unik dan berkarakter, baik itu untuk game, brand, ataupun koleksi pribadi.
+                    </p>
+                    <p>
+                        Dengan pengalaman di berbagai platform, saya juga ahli dalam membangun website dan melakukan editing video untuk melengkapi kebutuhan digital Anda.
+                    </p>
+                    
+                    <div class="about-skills">
+                        <h3>Keahlian Profesional</h3>
+                        <ul class="skills-list">
+                            <li>Desain Karakter</li>
+                            <li>Pixel Art & Animasi</li>
+                            <li>Editing Video</li>
+                            <li>Website Builder</li>
+                            <li>Desain Grafis</li>
+                            <li>Desain Skin Minecraft</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section-bg-light">
+            <div class="container">
+                <h2 class="section-title">Layanan yang Ditawarkan</h2>
+                <p class="section-subtitle">Solusi kreatif untuk kebutuhan digital Anda.</p>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="icon"><i class="fas fa-palette"></i></div>
+                        <h3>Pixel Art & Karakter</h3>
+                        <p>Membuat desain karakter, *tileset*, dan aset game 2D dengan gaya pixel art yang detail dan otentik.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="icon"><i class="fas fa-cube"></i></div>
+                        <h3>Desain Skin Kustom</h3>
+                        <p>Jasa desain skin kustom untuk berbagai game (seperti Minecraft) sesuai dengan permintaan dan konsep Anda.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3>Website Builder</h3>
+                        <p>Membangun website portofolio atau bisnis sederhana menggunakan platform *website builder* modern.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="icon"><i class="fas fa-video"></i></div>
+                        <h3>Editing Video</h3>
+                        <p>Menyediakan jasa editing video dasar untuk kebutuhan konten media sosial seperti TikTok, YouTube Shorts, atau Instagram Reels.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="container">
+            <h2 class="section-title">Portofolio Karya</h2>
+            <p class="section-subtitle">Kumpulan proyek dan karya terbaik yang pernah saya buat.</p>
+            
+            <div class="portfolio-filters" id="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">Semua Kategori</button>
+                <button class="filter-btn" data-filter="pixel">Pixel Art</button>
+                <button class="filter-btn" data-filter="skin">Skin Minecraft</button>
+                <button class="filter-btn" data-filter="web">Desain Web</button>
+            </div>
+            
+            <div class="portfolio-grid" id="portfolio-grid">
+                
+                <div class="portfolio-item" data-category="pixel">
+                    <img src="https://via.placeholder.com/400x300/8e44ad/ffffff?text=Karya+Pixel+1" alt="Karya Pixel Art">
+                    <div class="portfolio-overlay">
+                        <h3>Pixel Knight</h3>
+                        <a href="#" class="detail-button">Lihat Detail</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="skin">
+                    <img src="https://via.placeholder.com/400x300/5fa8d3/ffffff?text=Skin+Minecraft" alt="Desain Skin Minecraft">
+                    <div class="portfolio-overlay">
+                        <h3>Skin "Cyber"</h3>
+                        <a href="#" class="detail-button">Lihat Detail</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="web">
+                    <img src="https://via.placeholder.com/400x300/9b59b6/ffffff?text=Desain+Web" alt="Desain Website">
+                    <div class="portfolio-overlay">
+                        <h3>Web Portofolio</h3>
+                        <a href="#" class="detail-button">Lihat Detail</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="pixel">
+                    <img src="https://via.placeholder.com/400x300/3498db/ffffff?text=Pixel+Logo" alt="Karya Pixel Lain">
+                    <div class="portfolio-overlay">
+                        <h3>Logo "Glitch"</h3>
+                        <a href="#" class="detail-button">Lihat Detail</a>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" data-category="skin">
+                    <img src="https://via.placeholder.com/400x300/5fa8d3/ffffff?text=Skin+Fantasi" alt="Desain Skin Minecraft">
+                    <div class="portfolio-overlay">
+                        <h3>Skin "Elf"</h3>
+                        <a href="#" class="detail-button">Lihat Detail</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contact" class="section-bg-light">
+            <div class="container">
+                <h2 class="section-title">Hubungi Saya</h2>
+                <p class="section-subtitle">Punya proyek, pertanyaan, atau ide kolaborasi? Jangan ragu untuk mengirim pesan melalui formulir resmi di bawah ini.</p>
+                
+                <form id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Nama Lengkap Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Alamat Email Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="6" placeholder="Tuliskan pesan Anda..." required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Kirim Pesan</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container container">
+            
+            <div class="footer-about">
+                <h3 class="nav-logo">Tuan <span>Ryuu</span></h3>
+                <p>Kreator digital profesional yang berfokus pada kualitas dan keunikan dalam setiap karya.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Navigasi Cepat</h4>
+                <ul>
+                    <li><a href="#about">Tentang Saya</a></li>
+                    <li><a href="#services">Layanan</a></li>
+                    <li><a href="#portfolio">Portofolio</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-social">
+                <h4>Temukan Saya di</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Tuan Ryuu. Semua Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- 1. Fungsi untuk Menu Navigasi HP (Hamburger Menu) ---
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+
+            if (navToggle) {
+                navToggle.addEventListener('click', function() {
+                    // Menambah/menghapus kelas 'active' untuk menampilkan/menyembunyikan menu
+                    navMenu.classList.toggle('active');
+                    // Mengganti ikon hamburger (garis) menjadi 'X' saat menu terbuka
+                    navToggle.querySelector('i').classList.toggle('fa-bars');
+                    navToggle.querySelector('i').classList.toggle('fa-times');
+                });
+            }
+            
+            // --- 2. Fungsi untuk Filter Portofolio ---
+            const filterContainer = document.getElementById('portfolio-filters');
+            const galleryItems = document.querySelectorAll('.portfolio-item');
+
+            if (filterContainer) {
+                filterContainer.addEventListener('click', function(event) {
+                    // Hanya jalankan jika yang diklik adalah tombol (bukan area kosong)
+                    if (event.target.classList.contains('filter-btn')) {
+                        
+                        // Hapus kelas 'active' dari semua tombol
+                        filterContainer.querySelector('.active').classList.remove('active');
+                        // Tambah kelas 'active' ke tombol yang baru diklik
+                        event.target.classList.add('active');
+                        
+                        const filterValue = event.target.getAttribute('data-filter');
+                        
+                        galleryItems.forEach(item => {
+                            const itemCategory = item.getAttribute('data-category');
+                            
+                            // Logika filter:
+                            if (filterValue === 'all' || filterValue === itemCategory) {
+                                item.style.display = 'block'; // Tampilkan
+                            } else {
+                                item.style.display = 'none'; // Sembunyikan
+                            }
+                        });
+                    }
+                });
+            }
+
+            // --- 3. Fungsi untuk Form Kontak ---
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(event) {
+                    // Mencegah form mengirim data (karena ini hanya demo)
+                    event.preventDefault();
+                    
+                    const name = document.getElementById('name').value;
+                    
+                    // Memberi notifikasi yang lebih formal
+                    alert(`Terima kasih, ${name}.\nPesan Anda telah terkirim.\nKami akan (pura-pura) segera merespon Anda.`);
+
+                    // Mengosongkan form setelah submit
+                    this.reset();
+                });
+            }
+
+        });
+    </script>
+    </body>
+</html>
